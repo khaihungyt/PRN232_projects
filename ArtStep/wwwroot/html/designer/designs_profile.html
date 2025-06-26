@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hồ Sơ Của Tôi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/CSS/designer/styles.css">
+    <link rel="stylesheet" href="/CSS/designer/profiles.css">
+    <link rel="stylesheet" href="/CSS/page/pageload.css" />
+</head>
+<body>
+    <div class="loader-wrapper">
+        <span class="loader"><span class="loader-inner"></span></span>
+    </div>
+    <div class="layout">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <span class="sidebar-title">Cổng Thông Tin Thiết Kế</span>
+                <button class="sidebar-toggle" id="sidebar-toggle">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="designs_dash.html" class="sidebar-link ">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Bảng điều khiển</span>
+                </a>
+                <a href="designs_list.html" class="sidebar-link">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>Thiết kế của tôi</span>
+                </a>
+                <a href="designs_revenue.html" class="sidebar-link ">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Doanh thu</span>
+                </a>
+                <a href="designs_new.html" class="sidebar-link">
+                    <i class="fas fa-pen-fancy"></i>
+                    <span>Tạo thiết kế</span>
+                </a>
+                <a href="designs_profile.html" class="sidebar-link active">
+                    <i class="fas fa-user"></i>
+                    <span>Hồ sơ</span>
+                </a>
+                <a href="designs_chat.html" class="sidebar-link">
+                    <i class="fas fa-message"></i>
+                    <span>Tin nhắn</span>
+                </a>
+                <a href="designer_feedback.html" class="sidebar-link">
+                    <i class="fas fa-star"></i>
+                    <span>Đánh giá</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="sidebar-logout" id="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Đăng xuất</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <h1 class="page-title">Hồ Sơ Của Tôi</h1>
+
+                <!-- Avatar -->
+                <div class="profile-avatar-container">
+                    <div class="profile-avatar">
+                        <img src="https://placehold.co/150x150" alt="Avatar" id="profile-avatar-img">
+                        <button class="btn btn-icon avatar-edit-btn" id="change-avatar-btn">
+                            <i class="fas fa-pencil-alt"></i>
+                        </button>
+                        <input type="file" id="avatar-upload" accept="image/*" class="hidden">
+                    </div>
+                </div>
+
+                <div class="profile-tabs">
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="profile">Thông tin hồ sơ</button>
+                        <button class="tab-btn" data-tab="account">Tài khoản</button>
+                    </div>
+
+                    <div class="tab-content active" id="profile-tab">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Thông tin cá nhân</h3>
+                            </div>
+                            <div class="card-content">
+                                <form id="profile-form" class="profile-form">
+                                    <div class="form-group">
+                                        <label for="full-name">Họ và tên</label>
+                                        <input type="text" id="full-name" name="name" value="Sarah Johnson" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <div class="input-with-icon">
+                                            <i class="fas fa-envelope"></i>
+                                            <input type="email" id="email" name="email" value="sarah@example.com" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="phone">Số điện thoại</label>
+                                        <div class="input-with-icon">
+                                            <i class="fas fa-phone"></i>
+                                            <input type="tel" id="phone" name="phone" value="+1234567890">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="account-tab">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Cài đặt tài khoản</h3>
+                            </div>
+                            <div class="card-content">
+                                <form id="account-form" class="account-form">
+                                    <div class="section-title">
+                                        <h3>Đổi mật khẩu</h3>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="current-password">Mật khẩu hiện tại</label>
+                                        <div class="input-with-icon">
+                                            <i class="fas fa-lock"></i>
+                                            <input type="password" id="current-password" name="currentPassword" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="new-password">Mật khẩu mới</label>
+                                            <div class="input-with-icon">
+                                                <i class="fas fa-lock"></i>
+                                                <input type="password" id="new-password" name="newPassword">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="confirm-password">Xác nhận mật khẩu</label>
+                                            <div class="input-with-icon">
+                                                <i class="fas fa-lock"></i>
+                                                <input type="password" id="confirm-password" name="confirmPassword">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-actions">
+                                        <button type="button" class="btn btn-outline">Hủy</button>
+                                        <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/JS/page/pageload.js"></script>
+    <script src="/JS/designer/sidebar.js"></script>
+    <script src="/JS/designer/profile.js"></script>
+</body>
+</html>

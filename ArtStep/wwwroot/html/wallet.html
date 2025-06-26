@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ví Điện Tử - ArtStep</title>
+
+    <!-- Bootstrap CSS + Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="../fonts/login/Linearicons-Free-v1.0.0/icon-font.min.css" />
+    <link rel="stylesheet" href="../CSS/user/home.css" />
+    <!-- Chat System CSS -->
+    <link rel="stylesheet" href="../CSS/chat.css" />
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-boot"></i> ArtStep
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active">Trang Chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="designers.html">Các nhà thiết kế</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/AIgeneration.html">Tạo AI</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav" id="navbarAuth">
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Wallet Header -->
+    <div class="container my-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card border-0 mb-4" style="background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h1 class="h2 text-white mb-0"><i class="bi bi-wallet2"></i> Ví Điện Tử</h1>
+                            <div class="d-flex align-items-center gap-3">
+                                <button id="refresh-btn" class="btn btn-outline-light btn-sm">
+                                    <i class="bi bi-arrow-clockwise"></i> Làm Mới
+                                </button>
+                                <button id="recharge-btn" class="btn btn-success btn-sm">
+                                    <i class="bi bi-plus-lg"></i> Nạp Tiền
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wallet Content -->
+    <div class="container">
+        <div class="row">
+            <!-- Wallet Balance Card -->
+            <div class="col-lg-4 mb-4">
+                <div class="card shadow-sm border-0" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%);">
+                    <div class="card-body text-white text-center">
+                        <i class="bi bi-wallet2 display-1 mb-3 opacity-75"></i>
+                        <h3 class="card-title">Số Dư Hiện Tại</h3>
+                        <h1 class="display-4 fw-bold" id="wallet-balance">₫0</h1>
+                        <p class="mb-2"><small>Wallet ID: <span id="wallet-id">-</span></small></p>
+                        <p class="mb-0"><small>Cập nhật lần cuối: <span id="last-updated">-</span></small></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="col-lg-8 mb-4">
+                <div class="card shadow-sm border-0" style="background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);">
+                    <div class="card-header text-white" style="background: linear-gradient(135deg, #404040 0%, #2c2c2c 100%); border-bottom: 1px solid #555;">
+                        <h5 class="mb-0"><i class="bi bi-lightning-fill"></i> Thao Tác Nhanh</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="d-grid">
+                                    <button class="btn btn-success btn-lg" onclick="showRechargeModal()">
+                                        <i class="bi bi-plus-circle-fill"></i>
+                                        <div class="mt-1">
+                                            <div class="fw-bold">Nạp Tiền</div>
+                                            <small>Thêm tiền vào ví</small>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-grid">
+                                    <button class="btn btn-primary btn-lg" onclick="window.location.href='cart.html'">
+                                        <i class="bi bi-cart-fill"></i>
+                                        <div class="mt-1">
+                                            <div class="fw-bold">Mua Sắm</div>
+                                            <small>Sử dụng ví để mua hàng</small>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Transaction History -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow-sm border-0" style="">
+                    <div class="card-header text-white" style="background: linear-gradient(135deg, #404040 0%, #2c2c2c 100%); border-bottom: 1px solid #555;">
+                        <h5 class="mb-0"><i class="bi bi-clock-history"></i> Lịch Sử Giao Dịch</h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- Loading state -->
+                        <div id="loading-state" class="text-center py-5" style="display: none;">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Đang tải...</span>
+                            </div>
+                            <p class="mt-3 text-white">Đang tải lịch sử giao dịch...</p>
+                        </div>
+
+                        <!-- Login required state -->
+                        <div id="login-required" class="text-center py-5" style="display: none;">
+                            <i class="bi bi-person-x display-1 text-muted"></i>
+                            <h3 class="mt-3 text-white">Cần Đăng Nhập</h3>
+                            <p class="text-muted">Vui lòng đăng nhập để xem ví điện tử của bạn.</p>
+                            <a href="Login.html" class="btn btn-primary">
+                                <i class="bi bi-person-circle"></i> Đăng Nhập
+                            </a>
+                        </div>
+
+                        <!-- Transaction list -->
+                        <div id="transaction-list">
+                            <!-- Transactions will be loaded here -->
+                        </div>
+
+                        <!-- Pagination -->
+                        <div id="pagination" class="d-flex justify-content-center mt-4">
+                            <!-- Pagination buttons will be added here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recharge Modal -->
+    <div class="modal fade" id="recharge-modal" tabindex="-1" aria-labelledby="rechargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="background: #2c2c2c; color: white;">
+                <div class="modal-header" style="border-bottom: 1px solid #555;">
+                    <h5 class="modal-title" id="rechargeModalLabel">
+                        <i class="bi bi-plus-circle"></i> Nạp Tiền Vào Ví
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="recharge-form">
+                        <div class="mb-3">
+                            <label for="recharge-amount" class="form-label">Số Tiền Nạp (VND)</label>
+                            <input type="number" class="form-control" id="recharge-amount"
+                                   min="10000" max="50000000" step="1000" required
+                                   placeholder="Nhập số tiền (tối thiểu 10,000 VND)">
+                            <div class="form-text text-light">
+                                Số tiền tối thiểu: 10,000 VND - Tối đa: 50,000,000 VND
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="recharge-description" class="form-label">Ghi Chú (Không bắt buộc)</label>
+                            <input type="text" class="form-control" id="recharge-description"
+                                   placeholder="Ví dụ: Nạp tiền mua giày">
+                        </div>
+                        <div class="alert alert-info">
+                            <i class="bi bi-info-circle"></i>
+                            <strong>Thông Tin Thanh Toán:</strong><br>
+                            - Thanh toán qua VNPay<br>
+                            - Tiền sẽ được cộng vào ví ngay sau khi thanh toán thành công<br>
+                            - Giao dịch an toàn và bảo mật
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer" style="border-top: 1px solid #555;">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" form="recharge-form" class="btn btn-success">
+                        <i class="bi bi-credit-card"></i> Tiến Hành Nạp Tiền
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- QR Code Modal -->
+    <div class="modal fade" id="qr-code-modal" tabindex="-1" aria-labelledby="qrCodeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" style="background: #2c2c2c; color: white;">
+                <div class="modal-header" style="border-bottom: 1px solid #555;">
+                    <h5 class="modal-title" id="qrCodeModalLabel">
+                        <i class="bi bi-qr-code"></i> Quét Mã QR Để Chuyển Khoản
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="qr-code-container mb-3">
+                                <img id="qr-code-image" src="" alt="QR Code" class="img-fluid" style="max-width: 300px; border: 2px solid #fff; border-radius: 10px;">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="payment-info text-start">
+                                <h6 class="text-primary mb-3">
+                                    <i class="bi bi-info-circle"></i> Thông Tin Chuyển Khoản
+                                </h6>
+                                <div class="info-item mb-2">
+                                    <strong>Ngân hàng:</strong>
+                                    <span id="bank-name">-</span>
+                                </div>
+                                <div class="info-item mb-2">
+                                    <strong>Số tài khoản:</strong>
+                                    <span id="account-number">-</span>
+                                </div>
+                                <div class="info-item mb-2">
+                                    <strong>Chủ tài khoản:</strong>
+                                    <span id="account-name">-</span>
+                                </div>
+                                <div class="info-item mb-2">
+                                    <strong>Số tiền:</strong>
+                                    <span id="transfer-amount" class="text-success fw-bold">-</span>
+                                </div>
+                                <div class="info-item mb-3">
+                                    <strong>Nội dung:</strong>
+                                    <span id="transfer-content">-</span>
+                                </div>
+                                <div class="alert alert-warning">
+                                    <i class="bi bi-exclamation-triangle"></i>
+                                    <strong>Lưu ý:</strong><br>
+                                    - Vui lòng chuyển đúng số tiền và nội dung<br>
+                                    - Sau khi chuyển thành công, nhấn nút bên dưới<br>
+                                    - Tiền sẽ được cộng vào ví sau khi được phê duyệt
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="border-top: 1px solid #555;">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-success" id="confirm-transfer-btn">
+                        <i class="bi bi-check-circle"></i> Tôi đã chuyển khoản
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <i class="bi bi-info-circle me-2"></i>
+                <strong class="me-auto" id="toastTitle">Thông Báo</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body" id="toastMessage">
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Alert for Recharge Callback -->
+    <div id="recharge-success-alert" class="alert alert-success alert-dismissible fade show" style="display: none; position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 9999; min-width: 400px;">
+        <i class="bi bi-check-circle-fill"></i>
+        <strong>Nạp Tiền Thành Công!</strong>
+        <div id="recharge-success-details"></div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <!--Footer-->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <h5><i class="bi bi-boot"></i> ArtStep</h5>
+                    <p>Thị trường giày tùy chỉnh của bạn, kết nối các nhà thiết kế, nhà sản xuất và khách hàng.</p>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <h5>Cửa Hàng</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a href="#" class="nav-link p-0 text-white">Tất Cả Thiết Kế</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link p-0 text-white">Nhà Thiết Kế</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <h5>Hỗ Trợ</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a href="#" class="nav-link p-0 text-white">Câu Hỏi Thường Gặp</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link p-0 text-white">Vận Chuyển</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link p-0 text-white">Đổi Trả</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h5>Liên Hệ</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link p-0 text-white">Email: info@artstep.com</a>
+                        </li>
+                        <li class="nav-item"><p class="nav-link p-0 text-white">SĐT: 0983596630</p></li>
+                    </ul>
+                    <div class="d-flex mt-3">
+                        <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-top pt-3 mt-3">
+                <p class="text-center text-muted mb-0">&copy; 2023 ArtStep. Bảo lưu mọi quyền.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
+    <!-- SignalR Client -->
+    <script src="https://unpkg.com/@microsoft/signalr@latest/dist/browser/signalr.min.js"></script>
+    <!-- Chat System -->
+    <!-- Custom JS -->
+    <script type="module" src="../JS/walletPage.js" defer></script>
+</body>
+
+</html> 

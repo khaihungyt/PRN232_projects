@@ -1,0 +1,32 @@
+﻿body {
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+.form-control:focus {
+    border-color: #9b59b6;
+    box-shadow: 0 0 0 0.2rem rgba(155, 89, 182, 0.25);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    border: none;
+}
+
+    .btn-primary:hover {
+        background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+    }

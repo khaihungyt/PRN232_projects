@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tin nhắn</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/CSS/designer/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.0/signalr.min.js"></script>
+    <link rel="stylesheet" href="/CSS/page/pageload.css" />
+    <link rel="stylesheet" href="/CSS/designer/designs_chat.css" />
+</head>
+<body>
+    <div class="loader-wrapper">
+        <span class="loader"><span class="loader-inner"></span></span>
+    </div>
+    <div class="layout">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <span class="sidebar-title">Cổng Thông Tin Thiết Kế</span>
+                <button class="sidebar-toggle" id="sidebar-toggle">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="designs_dash.html" class="sidebar-link ">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Bảng điều khiển</span>
+                </a>
+                <a href="designs_list.html" class="sidebar-link">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>Thiết kế của tôi</span>
+                </a>
+                <a href="designs_revenue.html" class="sidebar-link ">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Doanh thu</span>
+                </a>
+                <a href="designs_new.html" class="sidebar-link">
+                    <i class="fas fa-pen-fancy"></i>
+                    <span>Tạo thiết kế</span>
+                </a>
+                <a href="designs_profile.html" class="sidebar-link">
+                    <i class="fas fa-user"></i>
+                    <span>Hồ sơ</span>
+                </a>
+                <a href="designs_chat.html" class="sidebar-link active">
+                    <i class="fas fa-message"></i>
+                    <span>Tin nhắn</span>
+                </a>
+                <a href="designer_feedback.html" class="sidebar-link">
+                    <i class="fas fa-star"></i>
+                    <span>Đánh giá</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="sidebar-logout" id="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Đăng xuất</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <h1 class="page-title">Tin nhắn</h1>
+            </div>
+
+            <div class="chat-container">
+                <!-- Conversations Panel -->
+                <div class="conversations-panel" id="conversations-panel">
+                    <div class="conversations-header">
+                        <h3>Cuộc hội thoại</h3>
+                    </div>
+                    <div class="conversations-list" id="conversations-list">
+                        <div class="loading">Đang tải cuộc hội thoại...</div>
+                    </div>
+                </div>
+
+                <!-- Chat Panel -->
+                <div class="chat-panel" id="chat-panel">
+                    <div class="chat-header" id="chat-header" style="display: none;">
+                        <button class="btn btn-sm btn-outline-secondary me-2 d-md-none" id="mobile-back-btn" style="display: none;">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <h4 id="chat-user-name">Chọn một cuộc hội thoại</h4>
+                    </div>
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="empty-chat">
+                            <div>
+                                <i class="fas fa-comments" style="font-size: 48px; color: #ddd; margin-bottom: 16px;"></i>
+                                <div>Chọn một cuộc hội thoại để bắt đầu trò chuyện</div>
+                            </div>
+                        </div>
+                        <div class="message sent">
+                            <div class="message-content">
+                                <div class="message-text">Chào bạn! Bạn muốn biết điều gì?</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-input" id="chat-input" style="display: block;">
+                        <div class="input-group">
+                            <!-- Input file ảnh ẩn -->
+                            <input type="file" id="image-input" accept="image/*" multiple style="display: none;" />
+
+                            <!-- Nút gửi ảnh -->
+                            <button class="image-btn" id="image-btn" title="Tải hình ảnh lên">
+                                <i class="fas fa-image"></i>
+                            </button>
+
+                            <!-- Ô nhập tin nhắn -->
+                            <div class="message-editor"
+                                 id="message-input"
+                                 contenteditable="true"
+                                 data-placeholder="Nhập tin nhắn..."
+                                 role="textbox">
+                            </div>
+
+                            <!-- Nút gửi -->
+                            <button class="send-btn" id="send-btn">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/JS/page/pageload.js"></script>
+    <script src="/JS/designer/sidebar.js"></script>
+    <script type="module" src="/JS/designer/designer-chat.js"></script>
+    <script>
+        window.addEventListener('error', function (e) {
+            if (e.target.tagName === 'SCRIPT') {
+                console.error('Script loading error:', e.target.src, e.message);
+            }
+        });
+    </script>
+</body>
+</html>

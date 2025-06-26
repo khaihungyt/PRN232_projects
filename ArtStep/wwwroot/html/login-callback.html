@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Đang xử lý đăng nhập...</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <script type="module">
+        const params = new URLSearchParams(window.location.search);
+        const code = params.get('code');
+
+        if (code) {
+            Swal.fire({
+                title: 'Đang đăng nhập...',
+                didOpen: () => {
+                    Swal.showLoading();
+                },
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                allowEnterKey: false,
+            });
+
+            fetch(`http://localhost:5155/api/auth/login-google?code=${encodeURIComponent(code)}`)
+                .then(async res => {
+                    const data = await res.json();
+
+                    if (res.ok && data.token) {
+                        localStorage.setItem('token', data.token);
+                        localStorage.setItem('user', JSON.stringify(data.user));
+                        window.location.href = '/home.html';
+                    } else {
+                        Swal.fire('Thất bại', data.message || 'Đăng nhập thất bại', 'error')
+                            .then(() => window.location.href = '/login.html');
+                    }
+                })
+                .catch(err => {
+                    console.error('Lỗi khi gọi API:', err);
+                    Swal.fire('Lỗi', 'Không thể kết nối đến máy chủ.', 'error')
+                        .then(() => window.location.href = '/login.html');
+                });
+        } else {
+            Swal.fire('Lỗi', 'Không có mã xác thực', 'warning')
+                .then(() => window.location.href = '/login.html');
+        }
+    </script>
+</body>
+</html>

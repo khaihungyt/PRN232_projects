@@ -1,0 +1,275 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="vie port" content="width=device-width, initial-scale=1" />
+    <title>ArtStep - Thị Trường Giày Tùy Chỉnh</title>
+
+    <!-- Bootstrap CSS + Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="../fonts/login/Linearicons-Free-v1.0.0/icon-font.min.css" />
+    <link rel="stylesheet" href="../CSS/user/home.css" />
+    <!-- Chat System CSS -->
+    <!-- <link rel="stylesheet" href="../CSS/chat.css" /> -->
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css">
+    
+    <!-- Best Sellers Styling -->
+    <style>
+        .bestseller-card {
+            position: relative;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            overflow: hidden;
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+        }
+        
+        .bestseller-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        
+        .bestseller-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 2;
+            box-shadow: 0 2px 10px rgba(255,107,107,0.3);
+        }
+        
+        .bestseller-image {
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .bestseller-card:hover .bestseller-image {
+            transform: scale(1.05);
+        }
+        
+        .bestseller-price {
+            color: #e74c3c !important;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .order-now-btn {
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .order-now-btn:hover {
+            background: linear-gradient(45deg, #764ba2 0%, #667eea 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+            color: white;
+        }
+        
+        .bestseller-title {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .sold-count {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            padding: 4px 8px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-boot"></i> ArtStep
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active">Trang Chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="designers.html">Các nhà thiết kế</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/user/AIgeneration.html">Tạo AI</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav" id="navbarAuth">
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!--Header-->
+    <header class="bg-primary text-white py-5">
+        <div class="container">
+            <div class="row align-items-center g-4">
+                <div class="col-md-6">
+                    <h1 class="display-5 fw-bold">Bước Vào Phong Cách Của Bạn</h1>
+                    <p class="lead">Khám phá các thiết kế giày tùy chỉnh và biến chúng thành hiện thực với mạng lưới nhà thiết kế và nhà máy tài năng của chúng tôi.</p>
+                </div>
+                <div class="col-md-6 text-center">
+                    <img src="images/icons/Icon.jpg" alt="Logo ArtStep" class="img-fluid rounded shadow-sm" style="max-height: 300px;">
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Top Sản phẩm bán chạy -->
+    <div class="container my-5">
+        <div class="text-center mb-4">
+            <h2 class="display-6 fw-bold text-primary">
+                <i class="bi bi-fire text-danger"></i> Top Sản Phẩm Bán Chạy
+            </h2>
+            <p class="text-muted">Những thiết kế được yêu thích nhất bởi khách hàng</p>
+        </div>
+
+        <div class="row justify-content-center" id="bestSellersList">
+            <!-- Best sellers will be loaded here -->
+        </div>
+
+        <div class="text-center mt-4">
+            <hr class="w-50 mx-auto">
+        </div>
+    </div>
+    <!-- Tìm kiếm + Lọc -->
+    <div class="container my-4">
+        <form class="row g-2 align-items-center" id="filterForm" onsubmit="return false;">
+            <div class="col-md-3">
+                <input type="search" class="form-control" id="searchInput" placeholder="Tìm kiếm thiết kế..." />
+            </div>
+            <div class="col-md-2">
+                <select class="form-select" id="styleFilter">
+                    <option value="">Tất cả loại</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <select class="form-select" id="designerFilter">
+                    <option value="">Tất cả nhà thiết kế</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <select class="form-select" id="priceFilter">
+                    <option value="">Tất cả mức giá</option>
+                    <option value="0">Dưới 200.000</option>
+                    <option value="1">200.000 - 500.000</option>
+                    <option value="2">500.000 - 1.500.000</option>
+                    <option value="3">1.500.000 - 5.000.000</option>
+                    <option value="4">Trên 5.000.000</option>
+                </select>
+            </div>
+        </form>
+    </div>
+
+
+
+    <!-- Sản phẩm -->
+    <div class="container">
+        <h3 class="mb-4">Tất Cả Sản Phẩm</h3>
+        <div class="row" id="productList">
+        </div>
+
+        <!-- Phân trang -->
+        <nav aria-label="Page navigation" class="my-4">
+            <ul class="pagination justify-content-center" id="pagination">
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <i class="bi bi-info-circle me-2"></i>
+                <strong class="me-auto" id="toastTitle">Thông Báo</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body" id="toastMessage">
+            </div>
+        </div>
+    </div>
+
+    <!--Footer-->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <h5><i class="bi bi-boot"></i> ArtStep</h5>
+                    <p>Thị trường giày tùy chỉnh của bạn, kết nối các nhà thiết kế, nhà sản xuất và khách hàng.</p>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <h5>Cửa Hàng</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a href="#" class="nav-link p-0 text-white">Tất Cả Thiết Kế</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link p-0 text-white">Nhà Thiết Kế</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <h5>Hỗ Trợ</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a href="#" class="nav-link p-0 text-white">Câu Hỏi Thường Gặp</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link p-0 text-white">Vận Chuyển</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link p-0 text-white">Đổi Trả</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h5>Liên Hệ</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link p-0 text-white">Email: info@artstep.com</a>
+                        </li>
+                        <li class="nav-item"><p class="nav-link p-0 text-white">SĐT: 0983596630</p></li>
+                    </ul>
+                    <div class="d-flex mt-3">
+                        <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-top pt-3 mt-3">
+                <p class="text-center text-muted mb-0">&copy; 2023 ArtStep. Bảo lưu mọi quyền.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
+    <!-- SignalR Client -->
+    <script src="https://unpkg.com/@microsoft/signalr@latest/dist/browser/signalr.min.js"></script>
+    <!-- Chat System -->
+    
+    <!-- Custom JS -->
+    <script type="module" src="../JS/home.js"></script>
+</body>
+
+</html>

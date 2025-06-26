@@ -1,0 +1,6 @@
+@ArtStep_HostAddress = http://localhost:5155
+
+GET {{ArtStep_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

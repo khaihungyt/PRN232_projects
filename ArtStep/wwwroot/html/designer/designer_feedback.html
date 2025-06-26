@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customer Feedback </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="/CSS/designer/styles.css">
+    <link rel="stylesheet" href="/CSS/designer/designer_feedback.css" />
+    <link rel="stylesheet" href="/CSS/page/pageload.css" />
+</head>
+<body>
+    <div class="loader-wrapper">
+        <span class="loader"><span class="loader-inner"></span></span>
+    </div>
+    <div class="layout">
+        <!-- Sidebar (giống như trang trước) -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <span class="sidebar-title">Cổng Thông Tin Thiết Kế</span>
+                <button class="sidebar-toggle" id="sidebar-toggle">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="designs_dash.html" class="sidebar-link">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Bảng điều khiển</span>
+                </a>
+                <a href="designs_list.html" class="sidebar-link">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>Thiết kế của tôi</span>
+                </a>
+                <a href="designs_revenue.html" class="sidebar-link">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Doanh thu</span>
+                </a>
+                <a href="designs_new.html" class="sidebar-link">
+                    <i class="fas fa-pen-fancy"></i>
+                    <span>Tạo Thiết kế</span>
+                </a>
+                <a href="designs_profile.html" class="sidebar-link">
+                    <i class="fas fa-user"></i>
+                    <span>Hồ sơ</span>
+                </a>
+                <a href="designs_chat.html" class="sidebar-link">
+                    <i class="fas fa-message"></i>
+                    <span>Tin nhắn</span>
+                </a>
+                <a href="designer_feedback.html" class="sidebar-link active">
+                    <i class="fas fa-star"></i>
+                    <span>Đánh giá</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="sidebar-logout" id="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Đăng xuất</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <div class="feedback-header">
+                    <h1 class="page-title">Đánh giá của khách hàng</h1>
+
+                    <div class="feedback-stats">
+                        <div class="stat-card">
+                            <div class="stat-value" id="total-feedback">0</div>
+                            <div class="stat-label">Tổng đánh giá</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="avg-rating">0.0</div>
+                            <div class="stat-label">Điểm trung bình</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="five-star">0</div>
+                            <div class="stat-label">5 sao</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feedback-filters">
+                    <div class="filter-group">
+                        <label for="rating-filter">Lọc theo sao:</label>
+                        <select id="rating-filter" class="filter-select">
+                            <option value="all">Tất cả</option>
+                            <option value="5">5 sao</option>
+                            <option value="4">4 sao</option>
+                            <option value="3">3 sao</option>
+                            <option value="2">2 sao</option>
+                            <option value="1">1 sao</option>
+                        </select>
+                    </div>
+                    <button id="refresh-btn" class="btn btn-primary">
+                        <i class="fas fa-sync-alt"></i> Làm mới
+                    </button>
+                </div>
+
+                <div class="feedback-list" id="feedback-list">
+                    <!-- Feedback items will be loaded here -->
+                    <div class="empty-state">
+                        <i class="fas fa-comment-alt"></i>
+                        <p>Chưa có đánh giá nào</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/JS/page/pageload.js"></script>
+    <script src="/js/designer/sidebar.js"></script>
+    <script src="/js/designer/designer_feedback.js"></script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Designer Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/CSS/designer/styles.css">
+    <link rel="stylesheet" href="/CSS/page/pageload.css" />
+</head>
+<body>
+    <div class="loader-wrapper">
+        <span class="loader"><span class="loader-inner"></span></span>
+    </div>
+    <div class="layout">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <span class="sidebar-title">Cổng Thông Tin Thiết Kế</span>
+                <button class="sidebar-toggle" id="sidebar-toggle">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="designs_dash.html" class="sidebar-link active">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Bảng điều khiển</span>
+                </a>
+                <a href="designs_list.html" class="sidebar-link">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>Thiết kế của tôi</span>
+                </a>
+                <a href="designs_revenue.html" class="sidebar-link ">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Doanh thu </span>
+                </a>
+                <a href="designs_new.html" class="sidebar-link">
+                    <i class="fas fa-pen-fancy"></i>
+                    <span>Tạo Thiết kế</span>
+                </a>
+                <a href="designs_profile.html" class="sidebar-link">
+                    <i class="fas fa-user"></i>
+                    <span>Hồ sơ</span>
+                </a>
+                <a href="designs_chat.html" class="sidebar-link">
+                    <i class="fas fa-message"></i>
+                    <span>Tin nhắn</span>
+                </a>
+                <a href="designer_feedback.html" class="sidebar-link">
+                    <i class="fas fa-star"></i>
+                    <span>Đánh giá</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="sidebar-logout" id="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Đăng xuất</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <h1 class="page-title">Dashboard</h1>
+
+                <div class="stats-grid">
+                    <div class="card stat-card">
+                        <div class="card-header">
+                            <h3 class="card-title">Total Designs</h3>
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <div class="card-content">
+                            <div class="stat-value">24</div>
+                            <p class="stat-change">+4 from last month</p>
+                        </div>
+                    </div>
+
+                    <div class="card stat-card">
+                        <div class="card-header">
+                            <h3 class="card-title">User Selections</h3>
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="card-content">
+                            <div class="stat-value">1,429</div>
+                            <p class="stat-change">+201 from last month</p>
+                        </div>
+                    </div>
+
+                    <div class="card stat-card">
+                        <div class="card-header">
+                            <h3 class="card-title">Total Orders</h3>
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="card-content">
+                            <div class="stat-value">573</div>
+                            <p class="stat-change">+46 from last month</p>
+                        </div>
+                    </div>
+
+                    <div class="card stat-card">
+                        <div class="card-header">
+                            <h3 class="card-title">Average Rating</h3>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="card-content">
+                            <div class="stat-value">4.8</div>
+                            <p class="stat-change">+0.2 from last month</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Popular Designs</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="popular-designs">
+                                <div class="design-item">
+                                    <div>
+                                        <p class="design-name">Summer Breeze</p>
+                                        <p class="design-orders">178 orders</p>
+                                    </div>
+                                    <div class="design-rating">
+                                        <span>4.9</span>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                                <div class="design-item">
+                                    <div>
+                                        <p class="design-name">Urban Explorer</p>
+                                        <p class="design-orders">142 orders</p>
+                                    </div>
+                                    <div class="design-rating">
+                                        <span>4.7</span>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                                <div class="design-item">
+                                    <div>
+                                        <p class="design-name">Midnight Galaxy</p>
+                                        <p class="design-orders">124 orders</p>
+                                    </div>
+                                    <div class="design-rating">
+                                        <span>4.8</span>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                                <div class="design-item">
+                                    <div>
+                                        <p class="design-name">Spring Bloom</p>
+                                        <p class="design-orders">97 orders</p>
+                                    </div>
+                                    <div class="design-rating">
+                                        <span>4.6</span>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Recent Activity</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="activity-list">
+                                <div class="activity-item">
+                                    <p class="activity-text">New order for Urban Explorer</p>
+                                    <p class="activity-time">2 hours ago</p>
+                                </div>
+                                <div class="activity-item">
+                                    <p class="activity-text">Design approval for Morning Dew</p>
+                                    <p class="activity-time">Yesterday</p>
+                                </div>
+                                <div class="activity-item">
+                                    <p class="activity-text">Rating update on Spring Bloom</p>
+                                    <p class="activity-time">2 days ago</p>
+                                </div>
+                                <div class="activity-item">
+                                    <p class="activity-text">New comment on Midnight Galaxy</p>
+                                    <p class="activity-time">3 days ago</p>
+                                </div>
+                                <div class="activity-item">
+                                    <p class="activity-text">Featured status for Summer Breeze</p>
+                                    <p class="activity-time">1 week ago</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/JS/page/pageload.js"></script>
+    <script src="/js/designer/sidebar.js"></script>
+    <script src="/js/designer/dashboard.js"></script>
+</body>
+</html>

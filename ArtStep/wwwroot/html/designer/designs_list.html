@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Designs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="/CSS/designer/styles.css" />
+    <link rel="stylesheet" href="/CSS/designer/designlist.css" />
+    <link rel="stylesheet" href="/CSS/page/pageload.css" />
+</head>
+<body>
+    <div class="loader-wrapper">
+        <span class="loader"><span class="loader-inner"></span></span>
+    </div>
+    <div class="layout">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <span class="sidebar-title">Cổng Thông Tin Thiết Kế</span>
+                <button class="sidebar-toggle" id="sidebar-toggle">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="designs_dash.html" class="sidebar-link ">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Bảng điều khiển</span>
+                </a>
+                <a href="designs_list.html" class="sidebar-link active">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>Thiết kế của tôi</span>
+                </a>
+                <a href="designs_revenue.html" class="sidebar-link ">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Doanh thu </span>
+                </a>
+                <a href="designs_new.html" class="sidebar-link">
+                    <i class="fas fa-pen-fancy"></i>
+                    <span>Tạo Thiết kế</span>
+                </a>
+                <a href="designs_profile.html" class="sidebar-link">
+                    <i class="fas fa-user"></i>
+                    <span>Hồ sơ</span>
+                </a>
+                <a href="designs_chat.html" class="sidebar-link">
+                    <i class="fas fa-message"></i>
+                    <span>Tin nhắn</span>
+                </a>
+                <a href="designer_feedback.html" class="sidebar-link">
+                    <i class="fas fa-star"></i>
+                    <span>Đánh giá</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="sidebar-logout" id="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Đăng xuất</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <div class="designs-header">
+                    <h1 class="page-title">Thiết kế của tôi</h1>
+
+                    <div class="designs-actions">
+                        <div class="filter-buttons">
+                            <button class="btn btn-filter active" data-filter="all">Toàn bộ</button>
+                            <button class="btn btn-filter" data-filter="shown">Đã có</button>
+                            <button class="btn btn-filter" data-filter="hidden">Đã xóa </button>
+                        </div>
+
+
+                        <a href="designs_new.html" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Tạo mới
+                        </a>
+                    </div>
+                </div>
+
+                <div class="designs-grid" id="designs-grid">
+                    <!-- Cards injected by JavaScript -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Action Menu -->
+    <div class="dropdown-menu" id="design-actions-menu">
+        <!--<a href="#" class="dropdown-item edit-design">
+            <i class="fas fa-edit"></i> Sửa
+        </a>-->
+        <a href="#" class="dropdown-item delete-design">
+            <i class="fas fa-trash"></i> Xóa
+        </a>
+    </div>
+
+
+    <!-- Preview Modal -->
+    <div id="preview-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div id="preview-images-container">
+                <img id="preview-main-image" src="" alt="Main Preview" style="max-width:100%; margin-bottom: 10px;">
+                <div id="preview-thumbnails" style="display: flex; gap: 10px; overflow-x: auto;">
+                    <!-- thumbnails sẽ được thêm vào JS -->
+                </div>
+            </div>
+            <h2 id="preview-title"></h2>
+            <p id="preview-price"></p>
+            <p id="preview-status"></p>
+            <p id="preview-quantity"></p>
+            <p id="preview-category"></p>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="edit-modal" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <span class="close-btn">&times;</span>
+            <h2>Sửa Thiết Kế</h2>
+            <form id="edit-form">
+                <input type="hidden" id="edit-shoe-id">
+
+                <div class="form-group">
+                    <label for="edit-shoe-name">Tên Thiết kế </label>
+                    <input type="text" id="edit-shoe-name" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-price">Giá</label>
+                    <input type="number" id="edit-price" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-quantity">Số lượng </label>
+                    <input type="number" id="edit-quantity" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-category">Loại giày</label>
+                    <select id="edit-category" class="form-control" required>
+                        <!-- Categories will be loaded from API -->
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-description">Chi tiết sản phẩm </label>
+                    <textarea id="edit-description" class="form-control" rows="3"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Images</label>
+                    <div id="edit-image-list" class="image-list"></div>
+                    <input type="file" id="image-upload" multiple accept="image/*" style="display: none;">
+                    <button type="button" id="add-image-btn" class="btn btn-outline">
+                        <i class="fas fa-plus"></i> Thêm ảnh
+                    </button>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Lưu thay đổi </button>
+                    <button type="button" class="btn btn-outline" id="cancel-edit">Hủy bỏ</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/JS/page/pageload.js"></script>
+    <script src="/js/designer/sidebar.js"></script>
+    <script src="/js/designer/designs.js"></script>
+</body>
+</html>

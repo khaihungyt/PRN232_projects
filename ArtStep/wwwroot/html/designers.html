@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Các Nhà Thiết Kế - ArtStep</title>
+
+    <!-- Bootstrap CSS + Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="../fonts/login/Linearicons-Free-v1.0.0/icon-font.min.css" />
+    <link rel="stylesheet" href="../CSS/user/home.css" />
+    <!-- Chat System CSS -->
+    <link rel="stylesheet" href="../CSS/chat.css" />
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css">
+
+    <style>
+        .chat-area {
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - 56px - 160px); /* header + footer */
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .designer-card {
+            position: relative;
+            transition: all 0.3s ease;
+            border: none;
+            border-radius: 0;
+            border-bottom: 1px solid #e9ecef;
+            background: white;
+            cursor: pointer;
+        }
+
+            .designer-card:hover {
+                background: #f8f9fa;
+                box-shadow: inset 3px 0 0 #667eea;
+            }
+
+            .designer-card.active {
+                background: #e3f2fd;
+                box-shadow: inset 3px 0 0 #2196f3;
+            }
+
+        .designer-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .designer-list-item {
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .designer-name {
+            color: #2c3e50;
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .design-count {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .chat-btn {
+            background: linear-gradient(45deg, #56ab2f, #a8e6cf);
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(86, 171, 47, 0.3);
+        }
+
+            .chat-btn:hover {
+                background: linear-gradient(45deg, #a8e6cf, #56ab2f);
+                transform: translateY(-2px);
+                box-shadow: 0 8px 25px rgba(86, 171, 47, 0.5);
+                color: white;
+            }
+
+        .page-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 0;
+            margin-bottom: 50px;
+        }
+
+        .message-input-container {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            flex: 1;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 8px 12px;
+            background: white;
+        }
+
+        .message-editor-designers {
+            flex: 1;
+            min-height: 20px;
+            max-height: 100px;
+            overflow-y: auto;
+            outline: none;
+            border: none;
+            padding: 5px 0;
+            line-height: 1.4;
+        }
+
+        .image-btn {
+            background: none;
+            border: none;
+            color: #667eea;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 2px;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .send-btn {
+            background: #667eea;
+            border: none;
+            color: white;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-left: 8px;
+        }
+
+        footer {
+            margin-top: auto;
+        }
+    </style>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="home.html">
+                <i class="bi bi-boot"></i> ArtStep
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="home.html">Trang Chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="designers.html">Các nhà thiết kế</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link  " href="/user/AIgeneration.html">Tạo AI</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav" id="navbarAuth"></ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="display-4 fw-bold mb-3">
+                        <i class="bi bi-palette"></i> Các Nhà Thiết Kế
+                    </h1>
+                    <p class="lead mb-0">Khám phá những tài năng thiết kế xuất sắc và kết nối với những người sáng tạo ra những đôi giày độc đáo</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <i class="bi bi-people-fill" style="font-size: 8rem; opacity: 0.3;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-grow-1">
+        <div class="container-fluid">
+            <div class="row g-0" style="min-height: 600px;">
+                <!-- Designer List -->
+                <div class="col-lg-4 col-md-5 border-end">
+                    <div class="p-3 bg-light border-bottom">
+                        <h5 class="mb-0">
+                            <i class="bi bi-people-fill"></i> Danh sách nhà thiết kế
+                        </h5>
+                    </div>
+                    <div class="designers-list" style="height: 600px; overflow-y: auto;">
+                        <div id="designersContainer">
+                            <div class="loading-spinner" id="loadingSpinner">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Đang tải...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Area -->
+                <div class="col-lg-8 col-md-7">
+                    <div class="chat-area">
+                        <div class="chat-header p-3 bg-primary text-white border-bottom" id="chatHeader" style="display: none;">
+                            <div class="d-flex align-items-center">
+                                <div class="chat-avatar me-3">
+                                    <img id="chatDesignerAvatar" class="rounded-circle" width="40" height="40" style="object-fit: cover;">
+                                </div>
+                                <div>
+                                    <h6 class="mb-0" id="chatDesignerName">Designer Name</h6>
+                                    <small class="opacity-75">Online</small>
+                                </div>
+                                <button class="btn btn-sm btn-outline-light ms-auto" onclick="closeChat()">
+                                    <i class="bi bi-x-lg"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="chat-messages" id="chatMessages" style="display: none;"></div>
+
+                        <div class="chat-input border-top p-3" id="chatInput" style="display: none;">
+                            <input type="file" id="image-input-designers" accept="image/*" multiple style="display: none;">
+                            <div class="message-input-container">
+                                <div class="message-editor-designers" id="messageInput" contenteditable="true" data-placeholder="Nhập tin nhắn..." role="textbox"></div>
+                                <button class="image-btn" id="image-btn-designers" title="Upload Images"><i class="bi bi-image"></i></button>
+                            </div>
+                            <button class="send-btn" onclick="sendMessage()" title="Send message"><i class="bi bi-send"></i></button>
+                        </div>
+
+                        <!-- Welcome Screen (đã ẩn) -->
+                        <div class="d-none" id="welcomeScreen"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toast -->
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+            <div id="toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <i class="bi bi-info-circle me-2"></i>
+                    <strong class="me-auto" id="toastTitle">Thông Báo</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body" id="toastMessage"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <h5><i class="bi bi-boot"></i> ArtStep</h5>
+                    <p>Thị trường giày tùy chỉnh của bạn, kết nối các nhà thiết kế, nhà sản xuất và khách hàng.</p>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <h5>Cửa Hàng</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a href="home.html" class="nav-link p-0 text-white">Tất Cả Thiết Kế</a></li>
+                        <li class="nav-item"><a href="designers.html" class="nav-link p-0 text-white">Nhà Thiết Kế</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <h5>Hỗ Trợ</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a href="#" class="nav-link p-0 text-white">Câu Hỏi Thường Gặp</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link p-0 text-white">Vận Chuyển</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link p-0 text-white">Đổi Trả</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h5>Liên Hệ</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a href="#" class="nav-link p-0 text-white">Email: info@artstep.com</a></li>
+                        <li class="nav-item"><p class="nav-link p-0 text-white">SĐT: 0983596630</p></li>
+                    </ul>
+                    <div class="d-flex mt-3">
+                        <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-top pt-3 mt-3">
+                <p class="text-center text-muted mb-0">&copy; 2023 ArtStep. Bảo lưu mọi quyền.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
+    <script src="https://unpkg.com/@microsoft/signalr@latest/dist/browser/signalr.min.js"></script>
+    <script type="module" src="../JS/chat.js"></script>
+    <script type="module" src="../JS/designers.js"></script>
+</body>
+
+</html>

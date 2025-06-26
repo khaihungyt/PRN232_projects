@@ -1,0 +1,131 @@
+/* Global Styles */
+:root {
+    --primary-color: #0d6efd;
+    --secondary-color: #6c757d;
+    --success-color: #198754;
+    --info-color: #0dcaf0;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --light-color: #f8f9fa;
+    --dark-color: #212529;
+}
+
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Transitions */
+.product-card,
+.designer-card,
+.factory-card,
+.color-option,
+.thumbnails .thumbnail {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease, border-color 0.3s ease;
+}
+
+/* Product Cards */
+.product-card {
+    position: relative;
+    overflow: hidden;
+}
+
+    .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+.designer-name {
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+}
+
+.price {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+/* Designer Cards */
+.designer-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Step Icons */
+.step-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: var(--light-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    color: var(--primary-color);
+}
+
+/* Product Detail Page */
+.thumbnails .thumbnail {
+    cursor: pointer;
+    opacity: 0.7;
+    border: 2px solid transparent;
+}
+
+    .thumbnails .thumbnail:hover,
+    .thumbnails .thumbnail.active {
+        opacity: 1;
+    }
+
+    .thumbnails .thumbnail.active {
+        border-color: var(--primary-color);
+    }
+
+/* Color Options */
+.color-option {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+    .color-option:hover,
+    .color-option.active {
+        transform: scale(1.1);
+    }
+
+    .color-option.active {
+        border: 2px solid var(--primary-color);
+    }
+
+/* Factory Selection Page */
+.factory-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Chat Room */
+.chat-messages {
+    height: 500px;
+    overflow-y: auto;
+}
+
+.message-bubble {
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+    .message-bubble.factory {
+        background-color: #f1f0f0;
+        color: #333;
+    }
+
+    .message-bubble.user {
+        background-color: var(--primary-color);
+        color: #fff;
+    }
+
+/* Profile Page */
+.list-group-item.active {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
