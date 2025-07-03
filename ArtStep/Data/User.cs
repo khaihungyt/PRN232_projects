@@ -22,6 +22,8 @@ namespace ArtStep.Data
         public virtual ICollection<Order>? Orders { get; set; }
         public ICollection<Feedback> SentFeedbacks { get; set; }
         public virtual ICollection<Feedback>? ReceivedFeedbacks { get; set; }
+        public ICollection<Report> Reports { get; set; }
+
 
 
     }

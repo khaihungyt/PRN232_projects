@@ -22,6 +22,9 @@ namespace ArtStep.Data
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Wallet> Wallets { get; set; }
         public DbSet<WalletTransaction> WalletTransactions { get; set; }
+
+        public DbSet<Report> Reports { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Account
@@ -216,6 +219,37 @@ namespace ArtStep.Data
                 entity.Property(wt => wt.CompletedAt)
                       .HasColumnType("timestamp");
             });
+
+            // Report
+            modelBuilder.Entity<Report>(entity =>
+            {
+                entity.HasKey(r => r.ReportId);
+
+                entity.Property(r => r.ReporterRole)
+                      .HasMaxLength(50);
+
+                entity.Property(r => r.Subject)
+                      .HasMaxLength(255)
+                      .IsRequired();
+
+                entity.Property(r => r.Description)
+                      .HasColumnType("text");
+
+                entity.Property(r => r.ImageUrl)
+                      .HasMaxLength(500); // lưu link ảnh
+
+                entity.Property(r => r.CreatedAt)
+                      .HasColumnType("timestamp")
+                      .HasDefaultValueSql("CURRENT_TIMESTAMP");
+                entity.Property(r => r.Status)
+                      .HasMaxLength(50)
+                      .HasDefaultValue("Pending");
+                entity.HasOne(r => r.Reporter)
+                      .WithMany(u => u.Reports)
+                      .HasForeignKey(r => r.ReporterId)
+                      .OnDelete(DeleteBehavior.Restrict);
+            });
+
         }
     }
 }
